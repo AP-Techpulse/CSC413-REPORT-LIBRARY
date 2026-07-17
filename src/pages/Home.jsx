@@ -24,8 +24,16 @@ export default function Home() {
   const [loadError, setLoadError] = useState("");
   const [filter, setFilter] = useState("ALL");
   const [query, setQuery] = useState("");
+  const [loadVideo, setLoadVideo] = useState(false);
 
   useEffect(() => {
+    // Check if network is slow or user wants to save data
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const isSlow = conn && (conn.saveData || ["slow-2g", "2g", "3g"].includes(conn.effectiveType));
+    if (!isSlow) {
+      setLoadVideo(true);
+    }
+
     if (!isSupabaseConfigured) {
       setLoading(false);
       return;
@@ -62,17 +70,19 @@ export default function Home() {
 
       {/* ── Cinematic Video Hero ── */}
       <section className="hero" ref={heroRef}>
-        {/* Fullscreen looping video */}
-        <video
-          className="hero-video"
-          src={VIDEO_SRC}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-        />
+        {/* Fullscreen looping video - only rendered on fast connections */}
+        {loadVideo && (
+          <video
+            className="hero-video"
+            src={VIDEO_SRC}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+          />
+        )}
 
         {/* Darkening scrim for legibility */}
         <div className="hero-scrim" aria-hidden="true" />
@@ -99,10 +109,10 @@ export default function Home() {
           </h1>
 
           <p className="hero-sub animate-fade-rise-delay">
-            All documents here were produced by CSC&nbsp;413 students — Computer
-            Science and Computer Science Education alike — covering the pervasive
-            computing prototypes each group defended this semester. Mrs. Omede
-            has asked every student to study all of them ahead of the exam.
+            This platform provides access to the pervasive computing project reports 
+            defended by CSC 413 students (Computer Science and Computer Science Education). 
+            Mrs. Omede requires all students to review these materials in preparation 
+            for the upcoming examination.
           </p>
 
           <button

@@ -104,7 +104,7 @@ export default function AdminDashboard() {
           <div className="panel">
             <div className="panel-head">
               <h2>Add a new report</h2>
-              <p>Upload a group's report — it appears instantly on the public site.</p>
+              <p>Upload a group's report to publish it instantly to the library.</p>
             </div>
             <div className="panel-body">
               <UploadForm onUploaded={load} />

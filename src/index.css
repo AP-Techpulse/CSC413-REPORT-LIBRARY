@@ -249,6 +249,8 @@ button{font-family:var(--font-body); cursor:pointer;}
   display:flex;
   flex-direction:column;
   overflow:hidden;
+  /* Fallback dark blue/indigo gradient matching video palette */
+  background: radial-gradient(circle at 50% 30%, #0d1e36 0%, #060e1a 100%);
 }
 
 /* Fullscreen background video */

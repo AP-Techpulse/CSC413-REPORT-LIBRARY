@@ -1,9 +1,9 @@
 import React from "react";
 import { formatBytes, formatDate, getPublicUrl } from "../lib/reports.js";
-import cardIot from "../assets/card_iot.png";
-import cardSmart from "../assets/card_smart.png";
-import cardWearable from "../assets/card_wearable.png";
-import cardUbicomp from "../assets/card_ubicomp.png";
+import cardIot from "../assets/card_iot.jpg";
+import cardSmart from "../assets/card_smart.jpg";
+import cardWearable from "../assets/card_wearable.jpg";
+import cardUbicomp from "../assets/card_ubicomp.jpg";
 
 const CARD_IMAGES = [cardIot, cardSmart, cardWearable, cardUbicomp];
 const CARD_ALTS = [
