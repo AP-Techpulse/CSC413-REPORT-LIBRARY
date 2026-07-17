@@ -1,16 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle.jsx";
 import logo from "../assets/delsu-logo.png";
 import { useAuth } from "../context/AuthContext.jsx";
 
-export default function Navbar() {
+export default function Navbar({ heroRef }) {
   const { isAdmin } = useAuth();
+  const [isOverHero, setIsOverHero] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (heroRef?.current) {
+        const heroBottom = heroRef.current.getBoundingClientRect().bottom;
+        setIsOverHero(heroBottom > 80);
+      } else {
+        setIsOverHero(window.scrollY < 60);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [heroRef]);
+
   return (
-    <header className="topnav">
+    <header className={`topnav${isOverHero ? " topnav--glass" : ""}`}>
       <div className="topnav-inner">
         <Link to="/" className="topnav-brand">
-          <div className="topnav-logo"><img src={logo} alt="DELSU crest" /></div>
+          <div className="topnav-logo">
+            <img src={logo} alt="DELSU crest" />
+          </div>
           <div className="topnav-title">
             CSC 413 Report Library
             <span>Delta State University, Abraka</span>
@@ -21,7 +39,13 @@ export default function Navbar() {
           {isAdmin ? (
             <Link to="/admin" className="btn btn-admin btn-sm">Admin Dashboard</Link>
           ) : (
-            <Link to="/admin/login" className="btn btn-ghost btn-sm">Admin Login</Link>
+            <Link
+              to="/admin/login"
+              className={`btn btn-sm ${isOverHero ? "liquid-glass" : "btn-ghost"}`}
+              style={isOverHero ? { color: "#fff" } : {}}
+            >
+              Admin Login
+            </Link>
           )}
         </div>
       </div>
