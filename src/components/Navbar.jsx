@@ -25,6 +25,9 @@ export default function Navbar({ heroRef }) {
   return (
     <header className={`topnav${isOverHero ? " topnav--glass" : ""}`}>
       <div className="topnav-inner">
+        {/* Left spacer for centering grid */}
+        <div />
+
         <Link to="/" className="topnav-brand">
           <div className="topnav-logo">
             <img src={logo} alt="DELSU crest" />
@@ -34,21 +37,16 @@ export default function Navbar({ heroRef }) {
             <span>Delta State University, Abraka</span>
           </div>
         </Link>
+
         <div className="topnav-actions">
           <ThemeToggle />
-          {isAdmin ? (
-            <Link to="/admin" className="btn btn-admin btn-sm">Admin Dashboard</Link>
-          ) : (
-            <Link
-              to="/admin/login"
-              className={`btn btn-sm ${isOverHero ? "liquid-glass" : "btn-ghost"}`}
-              style={isOverHero ? { color: "#fff" } : {}}
-            >
-              Admin Login
-            </Link>
+          {/* Admin dashboard link only shown if already logged in — no public login button */}
+          {isAdmin && (
+            <Link to="/admin" className="btn btn-admin btn-sm">Admin</Link>
           )}
         </div>
       </div>
     </header>
   );
 }
+
