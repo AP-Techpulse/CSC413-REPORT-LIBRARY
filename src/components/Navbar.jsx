@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle.jsx";
 import logo from "../assets/delsu-logo.png";
-import { useAuth } from "../context/AuthContext.jsx";
 
 export default function Navbar({ heroRef }) {
-  const { isAdmin } = useAuth();
   const [isOverHero, setIsOverHero] = useState(true);
 
   useEffect(() => {
@@ -40,13 +38,10 @@ export default function Navbar({ heroRef }) {
 
         <div className="topnav-actions">
           <ThemeToggle />
-          {/* Admin dashboard link only shown if already logged in — no public login button */}
-          {isAdmin && (
-            <Link to="/admin" className="btn btn-admin btn-sm">Admin</Link>
-          )}
         </div>
       </div>
     </header>
   );
 }
+
 
