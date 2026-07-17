@@ -19,19 +19,19 @@ const FILTERS = [
 
 export default function Home() {
   const heroRef = useRef(null);
+  const videoRef = useRef(null);
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
   const [filter, setFilter] = useState("ALL");
   const [query, setQuery] = useState("");
-  const [loadVideo, setLoadVideo] = useState(false);
 
   useEffect(() => {
-    // Check if network is slow or user wants to save data
-    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    const isSlow = conn && (conn.saveData || ["slow-2g", "2g", "3g"].includes(conn.effectiveType));
-    if (!isSlow) {
-      setLoadVideo(true);
+    // Force play video on mobile browsers
+    if (videoRef.current) {
+      videoRef.current.play().catch((e) => {
+        console.warn("Autoplay blocked by mobile browser power settings:", e);
+      });
     }
 
     if (!isSupabaseConfigured) {
@@ -70,19 +70,19 @@ export default function Home() {
 
       {/* ── Cinematic Video Hero ── */}
       <section className="hero" ref={heroRef}>
-        {/* Fullscreen looping video - only rendered on fast connections */}
-        {loadVideo && (
-          <video
-            className="hero-video"
-            src={VIDEO_SRC}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            aria-hidden="true"
-          />
-        )}
+        {/* Fullscreen looping video */}
+        <video
+          ref={videoRef}
+          className="hero-video"
+          src={VIDEO_SRC}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+        />
+
 
         {/* Darkening scrim for legibility */}
         <div className="hero-scrim" aria-hidden="true" />
