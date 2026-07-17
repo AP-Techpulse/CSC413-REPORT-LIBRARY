@@ -63,7 +63,7 @@ export default function AdminDashboard() {
 
       <div className="container">
         <div className="stats-row">
-          <div className="stat-card">
+          <div className="stat-card featured">
             <div className="stat-label">Total Reports</div>
             <div className="stat-value">{reports.length}</div>
           </div>
@@ -75,7 +75,7 @@ export default function AdminDashboard() {
             <div className="stat-label">Comp. Science Education</div>
             <div className="stat-value">{cseCount}</div>
           </div>
-          <div className="stat-card">
+          <div className="stat-card featured-alt">
             <div className="stat-label">Storage Used</div>
             <div className="stat-value">{formatBytes(totalSize)}</div>
           </div>

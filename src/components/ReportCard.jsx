@@ -12,12 +12,12 @@ function extensionOf(name) {
   return parts.length > 1 ? parts.pop().toUpperCase() : "FILE";
 }
 
-export default function ReportCard({ report }) {
+export default function ReportCard({ report, index = 0 }) {
   const url = getPublicUrl(report.file_path);
   const ext = extensionOf(report.file_name);
 
   return (
-    <article className="report-card">
+    <article className="report-card item-fade" style={{ "--delay": index }}>
       <div className="report-card-top">
         <div className="file-badge">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

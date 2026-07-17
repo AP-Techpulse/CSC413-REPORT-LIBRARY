@@ -51,31 +51,35 @@ export default function Home() {
 
       <section className="hero">
         <div className="container">
-          <div className="hero-crest-wrap">
-            <span className="scan-ring" />
-            <span className="scan-ring r2" />
-            <span className="scan-ring r3" />
-            <img src={logo} alt="DELSU crest" />
-          </div>
-          <p className="hero-eyebrow">Central Repository &middot; CSC 413</p>
-          <h1>Every group's <em>pervasive system</em> report, in one place.</h1>
-          <p className="hero-sub">
-            All documents here were produced by CSC 413 students, Computer Science and Computer
-            Science Education alike, covering the pervasive computing prototypes each group
-            defended this semester. Mrs. Omede has asked that every student study all of them
-            ahead of the exam, so browse, read, and download whatever you need.
-          </p>
-          <div className="search-wrap">
-            <svg className="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" />
-            </svg>
-            <input
-              className="search-input"
-              type="text"
-              placeholder="Search by title, group number, or keyword..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
+          <div className="hero-inner">
+            <div className="hero-text">
+              <p className="hero-eyebrow">Central Repository &middot; CSC 413</p>
+              <h1>Every group's <em>pervasive system</em> report, in one place.</h1>
+              <p className="hero-sub">
+                All documents here were produced by CSC 413 students, Computer Science and Computer
+                Science Education alike, covering the pervasive computing prototypes each group
+                defended this semester. Mrs. Omede has asked that every student study all of them
+                ahead of the exam, so browse, read, and download whatever you need.
+              </p>
+              <div className="search-wrap">
+                <svg className="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" />
+                </svg>
+                <input
+                  className="search-input"
+                  type="text"
+                  placeholder="Search by title, group number, or keyword..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="hero-crest-wrap">
+              <span className="scan-ring" />
+              <span className="scan-ring r2" />
+              <span className="scan-ring r3" />
+              <img src={logo} alt="DELSU crest" />
+            </div>
           </div>
         </div>
       </section>
@@ -112,8 +116,8 @@ export default function Home() {
           />
         ) : (
           <div className="report-grid page-fade">
-            {filtered.map((r) => (
-              <ReportCard key={r.id} report={r} />
+            {filtered.map((r, idx) => (
+              <ReportCard key={r.id} report={r} index={idx} />
             ))}
           </div>
         )}
